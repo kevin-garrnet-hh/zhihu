@@ -68,6 +68,8 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'zhihuuser.pipelines.MongoPipeline': 300,
+    #爬取结果存存储到主机的redis数据库里面
+    'scrapy_redis.pipelines.RedisPipeline': 301
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -92,3 +94,20 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 MONGO_URI = 'localhost'
 MONGO_DATABASE = 'zhihu'
+#修改调度器，使用scrapy_redis的调度器，完成分布式爬取
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+#去重的class
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+#爬取完毕后是否要清空队列,一般不设置，如果想要重新爬取的话可以设置
+#SCHEDULER_PERSIST = True
+
+#redies数据库连接信息，我的阿里云主机ip是39.106.108.142，redis端口是6379
+#用户名是root，密码是阿里云上redis数据库的密码
+REDIS_URL = 'redis://root:kevinabc123@39.106.108.142:6379'
+
+
+
+
+
+
+

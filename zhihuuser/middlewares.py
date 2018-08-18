@@ -104,4 +104,6 @@ class ZhihuuserDownloaderMiddleware(object):
 
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
-        request.meta['proxy'] = "http://196.27.116.162:41766"
+       # request.meta['proxy'] = "http://218.59.139.238:80"
+        pass
+
